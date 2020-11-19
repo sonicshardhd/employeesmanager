@@ -1,0 +1,17 @@
+a {
+    color: white;
+}
+
+.navigationBlock {
+    grid-area: navigation;
+    background-color: #5fe6ed;
+    
+}
+
+.navigationItem {
+    background-color: #5fe6ed;
+}
+
+.navigationItem:hover {
+    background-color: #46cdd4;
+}

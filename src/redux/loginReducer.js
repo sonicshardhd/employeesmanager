@@ -14,7 +14,7 @@ let loginReducer = (state = initialState, action) => {
         case LOGIN:
             return {
                 ...state,
-                ...action.payload,
+                ...action.payload
             }
         case LOGOUT:
             return {

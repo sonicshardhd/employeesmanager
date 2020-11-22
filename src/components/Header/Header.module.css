@@ -3,5 +3,7 @@
     overflow: auto;
     display: grid;
     grid-template-columns: 50% auto 30%;
+    background-color: #0C424F;
 }
+
 

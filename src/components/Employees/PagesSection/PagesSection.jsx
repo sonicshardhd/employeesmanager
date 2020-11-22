@@ -2,16 +2,12 @@ import React from 'react'
 import classes from './PagesSection.module.css'
 import { NavLink as RouterNavLink } from 'react-router-dom'
 import { Button } from "shards-react"
-import ToggleNewEmployee from '../ToggleNewEmployee/ToggleNewEmployee'
 
 
 const PagesSection = React.memo(props => {
 
     return (
         <div className={ classes.changePageSection }>
-            <div>
-                <ToggleNewEmployee addEmployee={ props.addEmployee }/>
-            </div>
             <div>
                 {   
                     props.pagesList.fill(0).map((elem, index) => {

@@ -2,7 +2,6 @@ import React from 'react';
 import './App.css';
 import { BrowserRouter, Route } from 'react-router-dom'
 import Header from './components/Header/Header'
-import Navigation from './components/Navigation/Navigation'
 import ProfileContainer from './components/Profile/ProfileContainer'
 import MyProfileContainer from './components/MyProfile/MyProfileContainer'
 import withReactSuspense from './hoc/withReactSuspense/withReactSuspense'
@@ -19,7 +18,7 @@ const App = (props) => {
     <BrowserRouter>
     <div className='app-wrapper'>
       <Header />
-      <Navigation/>
+      {/* <Navigation/> */}
       <div className='content'>
         <Route path='/employees/:currentPage?' render={ withReactSuspense(EmployeesContainer) } />
         <Route path='/profile/:employeeId?' render={ () => <ProfileContainer /> } />

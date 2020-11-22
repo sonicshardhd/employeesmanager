@@ -9,7 +9,7 @@ const ButtonLink = props => {
         <NavItem onClick={ props.onClick } >
             <RouterNavLink to={ props.to } >
               <NavLink active>
-                <Button>{ props.text }</Button>
+                <Button theme='light'>{ props.text }</Button>
               </NavLink>
             </RouterNavLink>
         </NavItem>

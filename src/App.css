@@ -2,10 +2,10 @@
     margin: 0 auto;
     display: grid;
     grid-template-areas: 
-    "header header"
-    "navigation content";
+    "header"
+    "content";
     grid-template-rows: 1fr 8fr;
-    grid-template-columns: 2fr 8fr;
+    /* grid-template-columns: 2fr 8fr; */
 }
 
 .content {

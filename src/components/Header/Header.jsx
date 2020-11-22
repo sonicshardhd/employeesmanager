@@ -1,109 +1,61 @@
-import React from 'react'
+import React, { useState } from 'react'
 import classes from './Header.module.css'
-import { faSearch } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useState } from 'react'
-import { Navbar, NavbarBrand, Nav, NavbarToggler,
-  NavItem,
-  NavLink,
-  Dropdown,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem,
-  InputGroup,
-  InputGroupAddon,
-  InputGroupText,
-  FormInput,
-  Collapse } from "shards-react"
-import { Badge } from "shards-react"
 import { connect } from 'react-redux'
-import { logoutAC } from '../../redux/loginReducer'
-import ButtonLink from '../../UI/ButtonLink/ButtonLink'
+import LogRegGroup from './LogRegGroup/LogRegGroup'
+import DropDownActions from './DropDownActions/DropDownActions'
+import SearchBox from './SearchBox/SearchBox'
+import ModalAlert from '../../UI/ModalAlert/ModalAlert'
+import { ModalNewEmployeeRedux } from './ModalNewEmployee/ModalNewEmployee'
+import { Navbar, NavbarBrand, Nav, NavItem, NavLink, Modal, ModalHeader, ModalBody} from "shards-react"
+import { NavLink as RouterNavLink } from 'react-router-dom'
+import { addEmployee } from '../../redux/employeesReducer'
 
 
 const Header = props => {
 
-  const [dropdown, setDropdown] = useState(false);
+  const [newEmployee, setNewEmployee] = useState(false);
+  const [added, setAdded] = useState(false);
 
-  const toggleDropdown = () => {
-    setDropdown( prevdropdown => !prevdropdown )
+  const newEmployeeToggler = () => {
+    setNewEmployee(!newEmployee)
+  }
+
+  const newEmployeeAddedHandler = () => {
+    setAdded( false );
+  }
+
+  const onSubmit = newEmployeeData => {
+    props.addEmployee(newEmployeeData);
+    setAdded( !added );
+    setNewEmployee( false );
   }
 
   return (
-    <Navbar type="dark"  expand="md" className={ classes.header }>
+    <Navbar type="dark" theme='dark' expand="md" className={ classes.header }>
       <NavbarBrand>Employees Manager</NavbarBrand>
-      
+      <LogRegGroup />
       <Nav navbar>
             <NavItem>
-              <NavLink active href="#">
-                Active
+            <RouterNavLink className={ classes.routernavlink } to='/myprofile'>
+              <NavLink active>
+                My Profile
               </NavLink>
+              </RouterNavLink>
             </NavItem>
             <NavItem>
-              <NavLink href="#" disabled>
-                Disabled
+            <RouterNavLink className={ classes.routernavlink } to='/employees/1'>
+              <NavLink active>
+                Employees List
               </NavLink>
+              </RouterNavLink>
             </NavItem>
-            <Dropdown
-              open={dropdown}
-              toggle={toggleDropdown}
-            >
-              <DropdownToggle nav caret>
-                Dropdown
-              </DropdownToggle>
-              <DropdownMenu>
-                <DropdownItem>Action</DropdownItem>
-                <DropdownItem>Another action</DropdownItem>
-                <DropdownItem>Something else here</DropdownItem>
-              </DropdownMenu>
-            </Dropdown>
-            
+            <DropDownActions newEmployeeToggler={ newEmployeeToggler } />
+            <ModalNewEmployeeRedux onSubmit={ onSubmit } open={newEmployee} toggle={ newEmployeeToggler } />
+            <ModalAlert open={added} toggle={newEmployeeAddedHandler} text='Employee successfully added!'/>
             </Nav>
-            
-            
-         
-      <Nav navbar className="ml-auto">
-            <InputGroup size="sm" seamless>
-              <InputGroupAddon type="prepend">
-                <InputGroupText>
-                  <FontAwesomeIcon icon={faSearch} />
-                </InputGroupText>
-              </InputGroupAddon>
-              <FormInput className="border-0" placeholder="Search..." />
-            </InputGroup>
-          </Nav>
-          {
-        !props.isLogined && !props.isRegistered ?
-          <Nav navbar>
-            <ButtonLink to={ '/login' } 
-                        text={ 'Sign In' } />
-            <ButtonLink to={ '/register' } 
-                        text={ 'Sign Up' } />
-          </Nav>
-          : <Nav navbar>
-            <ButtonLink to={ '/login' } 
-                        text={ 'Log Out' } 
-                        onClick={ props.logoutAC }/>
-          </Nav>
-      }
-      {
-        (props.isLogined || props.isRegistered) 
-        ? <Badge className={ classes.badge }>You are logined as 
-        <span> { props.currentLoginEmail || props.currentRegisterEmail }</span>
-        </Badge> 
-        : <></>
-      }
-      
+      <SearchBox />
     </Navbar>
   );
 }
 
-const mapStateToProps = state => ({
-    isLogined: state.loginData.isAuth,
-    isRegistered: state.registerData.isAuth,
-    currentLoginEmail: state.loginData.currentEmail,
-    currentRegisterEmail: state.registerData.currentEmail
-  }
-)
-
-export default connect(mapStateToProps, { logoutAC })(Header);
+export default connect(null, { addEmployee })(Header);

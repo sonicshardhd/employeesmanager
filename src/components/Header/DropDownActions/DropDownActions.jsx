@@ -3,7 +3,7 @@ import classes from './DropDownActions.module.css'
 import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from "shards-react"
 
 
-const DropDownActions = props => {
+const DropDownActions = React.memo(props => {
 
     const [dropdown, setDropdown] = useState(false);
 
@@ -24,6 +24,6 @@ const DropDownActions = props => {
             </DropdownMenu>
         </Dropdown>
     )
-}
+})
 
 export default DropDownActions;

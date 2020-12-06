@@ -3,14 +3,15 @@ import classes from './ModalAlert.module.css'
 import { Alert, Modal, ModalHeader, ModalBody } from "shards-react"
 
 
-const ModalAlert = props => {
+const ModalAlert = ({open, toggle, theme, text}) => {
     return (
-        <Modal open={props.open} toggle={props.toggle}>
+        <Modal open={open} 
+               toggle={toggle}>
             <ModalHeader>
             </ModalHeader>
             <ModalBody>
-                <Alert theme="success" className={classes.alertwidth}>
-                    {props.text}
+                <Alert theme={theme}>
+                    {text}
                 </Alert>
             </ModalBody>
         </Modal>

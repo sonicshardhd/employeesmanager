@@ -1,5 +1,25 @@
 .registerWrapper {
-    margin-top: 10%;
+    margin-top: 1%;
     display: grid;
-    grid-template-columns: 1fr 2fr 1fr;
+    grid-template-columns: 1fr auto 1fr;
+}
+
+.registerForm {
+    animation-name: registerAppearance;
+    animation-duration: 1.5s;
+    animation-timing-function: ease;
+}
+
+@keyframes registerAppearance {
+    0%
+    {
+        opacity: 0;
+        transform: translateY(-100%);
+    }
+
+    100%
+    {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }

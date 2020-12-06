@@ -65,15 +65,16 @@ export const deleteEmployee = employeeId => ( { type: DELETE_EMPLOYEE, employeeI
 export const addEmployee = employeeData => ( { type: ADD_EMPLOYEE , employeeData } );
 export const toggleIsFetching = isFetching => ( {type: TOGGLE_IS_FETCHING, isFetching} );
 
-
 export const getEmployees = () => {
-    return dispatch => {
+    return async dispatch => {
         dispatch(toggleIsFetching(true));
-        employeesAPI.getEmployees().then(response => {
-            dispatch(toggleIsFetching(false));
-            dispatch(setEmployees(response.data));
-            dispatch(setEmployeesAmount(response.data.length));
-        })
+        let response = await employeesAPI.getEmployees();
+        if (response.data.status === 'success') {
+            setTimeout(() => dispatch(toggleIsFetching(false)), 1000);
+            dispatch(setEmployees(response.data.data));
+            dispatch(setEmployeesAmount(response.data.data.length));
+        }
+        
     }
 }
 

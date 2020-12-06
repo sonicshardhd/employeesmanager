@@ -3,6 +3,7 @@ import { Redirect } from 'react-router-dom'
 
 
 class EmployeesRedirectContainer extends React.Component {
+    
     componentDidMount() {
         this.props.setPage(this.props.currentPage - 1)
     }

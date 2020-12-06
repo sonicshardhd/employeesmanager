@@ -3,17 +3,19 @@ import { connect } from 'react-redux'
 import MyProfile from './MyProfile'
 
 class MyProfileContainer extends React.Component {
+    
     render() {
         return (
-            <MyProfile email={this.props.email}/>
+            <MyProfile currentUser={this.props.currentUser} 
+                       isAuth={this.props.isAuth}/>
         )
     }
 }
 
-const mapStateToProps = (state) => {
-    return {
-        email: state.loginData.currentEmail || state.registerData.currentEmail,
+const mapStateToProps = state =>({
+        currentUser: state.loginData.currentUser,
+        isAuth: state.loginData.isAuth
     }
-}
+)
 
 export default connect(mapStateToProps, {} )(MyProfileContainer);

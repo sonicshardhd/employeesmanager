@@ -1,0 +1,24 @@
+.profileWrapper {
+        margin-top: 1%;
+        display: grid;
+        grid-template-columns: 1fr 2fr 1fr;
+    
+}
+
+.profileInformation {
+    animation-name: profileAppearance;
+    animation-duration: 1s;
+    animation-timing-function: ease;
+}
+
+@keyframes profileAppearance {
+    0%
+    {
+        opacity: 0;
+    }
+
+    100%
+    {
+        opacity: 1;
+    }
+}

@@ -14,20 +14,21 @@ class EmployeesContainer extends React.Component {
     render() {
         return (
             <>
-                { this.props.isFetching ?  <Preloader /> : null }
-                <Employees currentPage={ this.props.currentPage }
-                           pagesList={ this.props.pagesList }
-                           employeesParts={ this.props.employeesParts }
-                           setPage={ this.props.setPage }
-                           deleteEmployee={ this.props.deleteEmployee }
-                           addEmployee={ this.props.addEmployee }/>
+                { this.props.isFetching
+                    ? <Preloader />
+                    : <Employees currentPage={this.props.currentPage}
+                        pagesList={this.props.pagesList}
+                        employeesParts={this.props.employeesParts}
+                        setPage={this.props.setPage}
+                        deleteEmployee={this.props.deleteEmployee}
+                        addEmployee={this.props.addEmployee} />}
             </>
         )
     }
 }
 
 const mapStateToProps = state => (
-        {
+    {
         isFetching: state.employeesData.isFetching,
         currentPage: state.employeesData.currentPage,
         employeesParts: getSortedEmployeesSelector(state)

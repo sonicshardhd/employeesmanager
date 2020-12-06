@@ -1,19 +1,16 @@
 import classes from './ButtonLink.module.css'
 import React from 'react'
 import { NavLink as RouterNavLink } from 'react-router-dom'
-import { NavItem, NavLink } from "shards-react"
 import { Button } from "shards-react"
 
-const ButtonLink = props => {
-    return (
-        <NavItem onClick={ props.onClick } >
-            <RouterNavLink to={ props.to } >
-              <NavLink active>
-                <Button theme='light'>{ props.text }</Button>
-              </NavLink>
-            </RouterNavLink>
-        </NavItem>
-    )
+const ButtonLink = ({ text, to, onClick }) => {
+  return (
+    <RouterNavLink to={to} >
+      <Button size='sm' outline squared theme='info' onClick={onClick}>
+        {text}
+      </Button>
+    </RouterNavLink>
+  )
 }
 
 export default ButtonLink;

@@ -12,16 +12,15 @@ const LoginComponent = props => {
 
     const onSubmit = loginData => {
         props.registeredUsers.some(user => loginData.email === user.email && loginData.password === user.password)
-        ? props.loginAC(loginData.email, loginData.password, loginData.rememberMe, true)
-        : props.loginAC(null, null, false, false)
+            ? props.loginAC(loginData.email, loginData.rememberMe, true)
+            : props.loginAC();
     }
 
     return (
-        <div className={ classes.loginWrapper }>
+        <div className={classes.loginWrapper}>
             <div></div>
-            <div>
-                <h1>LOGIN</h1>
-                <LoginFormRedux onSubmit={ onSubmit } />
+            <div className={classes.loginForm}>
+                <LoginFormRedux onSubmit={onSubmit} />
             </div>
             <div></div>
         </div>
@@ -29,9 +28,9 @@ const LoginComponent = props => {
 }
 
 const mapStateToProps = state => ({
-        isAuth: state.loginData.isAuth,
-        registeredUsers: state.registerData.registeredUsers
-    }
+    isAuth: state.loginData.isAuth,
+    registeredUsers: state.loginData.registeredUsers
+}
 )
 
-export const Login = connect(mapStateToProps, { loginAC })(LoginComponent);
+export default connect(mapStateToProps, { loginAC })(LoginComponent);

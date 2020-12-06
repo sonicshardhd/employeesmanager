@@ -10,21 +10,21 @@ import {
 } from "shards-react";
 
 
-const Profile = props => {
+const Profile = React.memo(({employeeProfile}) => {
 
     return (
         <Card style={ {maxWidth: "300px"} }>
-            <CardHeader>Card header</CardHeader>
+            <CardHeader>Employee Information:</CardHeader>
             <CardImg src="https://place-hold.it/300x200" />
             <CardBody>
-                <CardTitle>{ props.employeeProfile.employee_name }</CardTitle>
-                <p>Employee ID: { props.employeeProfile.id }</p>
-                <p>Employee AGE: { props.employeeProfile.employee_age }</p>
-                <p>Employee SALARY: { props.employeeProfile.employee_salary }</p>
+                <CardTitle>{ employeeProfile.employee_name }</CardTitle>
+                <p>Employee ID: { employeeProfile.id }</p>
+                <p>Employee AGE: { employeeProfile.employee_age }</p>
+                <p>Employee SALARY: { employeeProfile.employee_salary }</p>
             </CardBody>
-            <CardFooter>Card footer</CardFooter>
+            <CardFooter>(C)</CardFooter>
         </Card>
     )
-}
+})
 
 export default Profile;

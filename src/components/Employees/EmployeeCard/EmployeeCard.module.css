@@ -1,3 +1,13 @@
 .button {
     margin-bottom: 5px;
 }
+
+.header {
+    padding-top: 15px;
+    text-align: center;
+}
+
+.informField {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}

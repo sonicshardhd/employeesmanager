@@ -6,9 +6,10 @@ import DropDownActions from './DropDownActions/DropDownActions'
 import SearchBox from './SearchBox/SearchBox'
 import ModalAlert from '../../UI/ModalAlert/ModalAlert'
 import { ModalNewEmployeeRedux } from './ModalNewEmployee/ModalNewEmployee'
-import { Navbar, NavbarBrand, Nav, NavItem, NavLink, Modal, ModalHeader, ModalBody} from "shards-react"
+import { Navbar, NavbarBrand, Nav, NavItem, NavLink, Badge} from "shards-react"
 import { NavLink as RouterNavLink } from 'react-router-dom'
 import { addEmployee } from '../../redux/employeesReducer'
+import { logoutAC } from '../../redux/loginReducer'
 
 
 const Header = props => {
@@ -33,29 +34,54 @@ const Header = props => {
   return (
     <Navbar type="dark" theme='dark' expand="md" className={ classes.header }>
       <NavbarBrand>Employees Manager</NavbarBrand>
-      <LogRegGroup />
+      <LogRegGroup isAuth={props.isAuth} 
+                   logoutAC={props.logoutAC}/>
       <Nav navbar>
             <NavItem>
-            <RouterNavLink className={ classes.routernavlink } to='/myprofile'>
+            <RouterNavLink className={ classes.routernavlink } 
+                           to='/myprofile'>
               <NavLink active>
                 My Profile
               </NavLink>
               </RouterNavLink>
             </NavItem>
             <NavItem>
-            <RouterNavLink className={ classes.routernavlink } to='/employees/1'>
+            <RouterNavLink className={ classes.routernavlink } 
+                           to={`/employees/${props.currentPage}`}>
               <NavLink active>
                 Employees List
               </NavLink>
               </RouterNavLink>
             </NavItem>
             <DropDownActions newEmployeeToggler={ newEmployeeToggler } />
-            <ModalNewEmployeeRedux onSubmit={ onSubmit } open={newEmployee} toggle={ newEmployeeToggler } />
-            <ModalAlert open={added} toggle={newEmployeeAddedHandler} text='Employee successfully added!'/>
+            {newEmployee 
+            ? <ModalNewEmployeeRedux onSubmit={ onSubmit } 
+                                     open={newEmployee} 
+                                     toggle={ newEmployeeToggler } /> 
+            : null}
+            <ModalAlert open={added} 
+                        toggle={newEmployeeAddedHandler} 
+                        theme={'success'} 
+                        text='Employee successfully added!'/>
             </Nav>
       <SearchBox />
+      {
+        props.isAuth 
+        ? <div className={classes.currentUser}>
+          <Badge theme='info'>
+              {props.currentUser.name + ' ' + props.currentUser.surname}
+          </Badge>
+      </div>
+        : null
+      }
     </Navbar>
   );
 }
 
-export default connect(null, { addEmployee })(Header);
+const mapStateToProps = state => ({
+    currentPage: state.employeesData.currentPage,
+    currentUser: state.loginData.currentUser,
+    isAuth: state.loginData.isAuth
+})
+
+export default connect(mapStateToProps, { addEmployee, logoutAC })(Header);

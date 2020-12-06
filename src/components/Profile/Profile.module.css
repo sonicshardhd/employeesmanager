@@ -1,0 +1,5 @@
+.profileWrapper {
+    margin-top: 1%;
+    display: grid;
+    grid-template-columns: 2fr auto 2fr;
+}

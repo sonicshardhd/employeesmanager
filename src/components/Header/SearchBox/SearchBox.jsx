@@ -5,7 +5,7 @@ import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 
-const SearchBox = props => {
+const SearchBox = React.memo(props => {
     return (
         <Nav navbar className="ml-auto">
             <InputGroup size="sm" seamless>
@@ -18,6 +18,6 @@ const SearchBox = props => {
             </InputGroup>
           </Nav>      
     )
-}
+})
 
 export default SearchBox;

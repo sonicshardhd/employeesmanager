@@ -1,13 +1,42 @@
 .contentContainer {
     display: grid;
-    grid-template-rows: 1fr 6fr;
+    grid-template-rows: 12% auto;
     grid-template-columns: 1fr;
 }
 
 .employeesSection {
-    background-color: bisque;
+    background-color: #212429;
     display: grid;
     grid-template-rows: 1fr;
     grid-template-columns: 1fr 1fr 1fr 1fr;
+    justify-items: center;
 }
 
+.employeeCard {
+    animation-name: employeeAppearance;
+    animation-duration: 1s;
+    animation-timing-function: ease;
+}
+
+.buttonAlertContainer {
+    flex: 1 1 auto;
+    text-align:center;
+}
+
+.buttonAlertContainer > * {
+    text-align:center;
+    margin:15px;
+}
+
+@keyframes employeeAppearance {
+    0%
+    {
+        opacity: 0;
+        transform: translateX(-400%);
+    }
+    100%
+    {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}

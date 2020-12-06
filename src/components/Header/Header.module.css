@@ -2,8 +2,13 @@
     grid-area: header;
     display: grid;
     grid-template-columns: 50% auto 30%;
+    border-bottom: 4px solid #aaaaaa;
 }
 
 .routernavlink:hover {
     text-decoration: none;
+}
+
+.currentUser {
+    margin-left: 2%;
 }

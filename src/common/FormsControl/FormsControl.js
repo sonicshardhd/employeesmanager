@@ -1,76 +1,30 @@
-import React, { useState, useEffect } from 'react'
-import { FormInput, FormCheckbox, Badge } from 'shards-react'
+import React, { useEffect } from 'react'
+import { FormInput, FormCheckbox, FormSelect } from 'shards-react'
 import classes from './FormsControl.module.css'
 
-
-export const NameInput = props => {
-    const hasError = props.meta.touched && props.meta.error
-
-    useEffect( () => {
-        props.onChangeNameError(hasError);
-    }, [hasError] )
-
+export const CountrySelect = props => {
     return (
-        <>
-          <FormInput {...props.input} invalid={!!hasError} valid={ !hasError && props.meta.touched } placeholder='Name'/>
-        </>
+        <FormSelect {...props.input}>
+            <option value="Belarus">Belarus</option>
+            <option value="Russia">Russia</option>
+            <option value="Ukraine">Ukraine</option>
+            <option value="Japan">Japan</option>
+            <option value="USA">USA</option>
+        </FormSelect>
     )
 }
 
-export const AgeInput = props => {
-    const hasError = props.meta.touched && props.meta.error
+export const GenericInput = props => {
 
-    useEffect( () => {
-        props.onChangeAgeError(hasError);
-    }, [hasError] )
+    const hasError = props.meta.touched && props.meta.error;
+
+    useEffect(() => {
+        props.onChangeError(hasError);
+    }, [hasError])
 
     return (
-        <>
-          <FormInput {...props.input} invalid={!!hasError} valid={ !hasError && props.meta.touched } placeholder='Age'/>
-        </>
+            <FormInput {...props.input} invalid={!!hasError} valid={!hasError && props.meta.touched} placeholder={props.placeholder} type={props.type} />
     )
 }
 
-export const SalaryInput = props => {
-    const hasError = props.meta.touched && props.meta.error
-
-    useEffect( () => {
-        props.onChangeSalaryError(hasError);
-    }, [hasError] )
-
-    return (
-        <>
-          <FormInput {...props.input} invalid={!!hasError} valid={ !hasError && props.meta.touched } placeholder='Salary'/>
-        </>
-    )
-}
-
-export const EmailInput = props => {
-    const hasError =  props.meta.touched && props.meta.error;
-    return (
-        <div>
-            <FormInput {...props.input} 
-                       invalid={ Boolean(hasError) } 
-                       valid={ !hasError && props.meta.touched }/>
-            {hasError && <span className={ classes.errorMessage }>{ props.meta.error }</span>}
-        </div>
-    )
-}
-
-export const PasswordInput = props => {
-    const hasError =  props.meta.touched && props.meta.error;
-    return (
-        <div>
-            <FormInput {...props.input} 
-                       type='password' 
-                       invalid={ Boolean(hasError) } 
-                       valid={ !hasError && props.meta.touched }/>
-            { hasError && <span className={ classes.errorMessage }>{ props.meta.error }</span> }
-        </div>
-    )
-}
-
-export const CheckboxInput = props => ( <FormCheckbox {...props.input}>Remember Me</FormCheckbox> )
-
-
-
+export const CheckboxInput = props => (<FormCheckbox {...props.input}>Remember Me</FormCheckbox>)
